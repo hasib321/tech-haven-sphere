@@ -26,6 +26,11 @@ const updateProductFromDb=async(id:string,product:Product)=>{
     const result=await ProductModel.findByIdAndUpdate(id,{$set:product},{new:true})
     return result
 }
+// delete a product by id form db
+const deleteProductFromDb=async(id:string)=>{
+    const result=await ProductModel.findByIdAndDelete(id)
+    return result
+}
 
 
 
@@ -34,6 +39,7 @@ const productService={
     getProductFromBB,
     getSingleProductFromDB,
     updateProductFromDb,
+    deleteProductFromDb,
 }
 
 export default productService;

@@ -10,6 +10,8 @@ router.get("/",productController.getAllProduct)
 router.get("/:id",productController.getSingleProduct)
 // update product
 router.put("/:id",productController.updateProduct)
+// delete a product
+router.delete("/:id",productController.deleteProduct)
 
 
 const productRoute=router

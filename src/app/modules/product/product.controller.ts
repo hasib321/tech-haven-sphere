@@ -82,6 +82,35 @@ const updateProduct=async(req:Request,res:Response)=>{
      })
       console.log(error);
     }
+    
+}
+
+// update product
+const deleteProduct=async(req:Request,res:Response)=>{
+    try{
+      const productId=req.params.id;
+      const result = await productService.deleteProductFromDb(productId)
+      if(result){
+        res.status(200).json({
+          "success": true,
+          "message": "Product deleted successfully!",
+          "data":null,
+        })
+      }else{
+        res.status(200).json({
+          "success": false,
+          "message": "Product not found in db",
+        })
+      }
+  
+
+    }catch(error){
+      res.status(500).json({
+        "success":false,
+        "message": "Product delete failed",
+     })
+      console.log(error);
+    }
 
 }
 
@@ -91,6 +120,7 @@ const productController={
     getAllProduct,
     getSingleProduct,
     updateProduct,
+    deleteProduct,
 }
 
 export default productController;
