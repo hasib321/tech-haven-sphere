@@ -1,4 +1,3 @@
-export type Tags=string[]
 export type Variants={
       type:string,
       value:string,
@@ -15,8 +14,8 @@ export type Product={
    description:string;
    price:number;
    category:string;
-   tags:Tags;
-   variants:Variants[]
+   tags:string[];
+   variants:Variants[];
    inventory :Inventory
 }
 
