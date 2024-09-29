@@ -5,9 +5,7 @@ const router= express.Router();
 // insert product route
 router.post("/",productController.insertProduct)
 
-router.get("/",(req:Request,res:Response)=>{
-   res.send("hello product");
-})
+router.get("/",productController.getAllProduct)
 
 const productRoute=router
 export default productRoute;
