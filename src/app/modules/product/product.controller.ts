@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import productService from "./product.service";
 import ProductValidateSchema from "./product.validation";
-import { string } from "zod";
 
 // insert product
 const insertProduct=async(req:Request,res:Response)=>{
@@ -27,12 +26,26 @@ const insertProduct=async(req:Request,res:Response)=>{
 
 const getAllProduct=async(req:Request,res:Response)=>{
      try{
-      const result=await productService.getProductFromBB();
-      res.status(200).json({
-        "success": true,
-        "message": "Products fetched successfully!",
-        "data":result,
-      })
+      const searchTerm=req.query?.searchTerm
+      const result=await productService.getProductFromBB(searchTerm);
+
+      if(result.length>0){
+        let message="Products fetched successfully!"
+        if(searchTerm){
+          message=`Products matching search term ${searchTerm} fetched successfully!`;
+        }
+        res.status(200).json({
+          "success": true,
+          "message":message,
+          "data":result,
+        })
+      }else{
+        res.status(500).json({
+          "success":false,
+          "message":"Product does not fount",
+        })
+      }
+      
 
      }catch(error){
       res.status(500).json({

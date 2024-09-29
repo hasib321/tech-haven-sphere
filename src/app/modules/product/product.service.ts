@@ -10,8 +10,15 @@ const insertProductIntoDB=async(product:Product)=>{
 }
 
 // get all product from db
-const getProductFromBB=async()=>{
-    const result=await ProductModel.find({});
+const getProductFromBB=async(searchTerm:string|any)=>{
+    let searchQuery={};
+    if(searchTerm){
+       searchQuery={$or:[
+        {name:{$regex: searchTerm, $options: 'i' }},
+        {category:{$regex:searchTerm,$options:'i'}}
+       ]}
+    }
+    const result=await ProductModel.find(searchQuery);
     return result;
 }
 
@@ -31,7 +38,6 @@ const deleteProductFromDb=async(id:string)=>{
     const result=await ProductModel.findByIdAndDelete(id)
     return result
 }
-
 
 
 const productService={
