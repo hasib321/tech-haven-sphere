@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import productService from "./product.service";
 import ProductValidateSchema from "./product.validation";
+import { string } from "zod";
 
 // insert product
 const insertProduct=async(req:Request,res:Response)=>{
@@ -42,9 +43,31 @@ const getAllProduct=async(req:Request,res:Response)=>{
      }
 }
 
+
+const getSingleProduct=async(req:Request,res:Response)=>{
+  try{
+    const productId:string=req.params.id;
+    const result=await productService.getSingleProductFromDB(productId);
+    res.status(200).json({
+      "success": true,
+      "message": "Products fetched successfully!",
+      "data":result,
+    })
+  }catch(error){
+    res.status(500).json({
+      "success":false,
+      "message": "retrieve failed or in valid product id",
+   })
+   console.log(error);
+  }
+}
+
+
+
 const productController={
     insertProduct,
     getAllProduct,
+    getSingleProduct,
 }
 
 export default productController;

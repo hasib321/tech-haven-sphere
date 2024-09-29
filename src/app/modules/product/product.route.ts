@@ -4,8 +4,10 @@ const router= express.Router();
 
 // insert product route
 router.post("/",productController.insertProduct)
-
+// retrieve all product route
 router.get("/",productController.getAllProduct)
+// retrieve single product route
+router.get("/:id",productController.getSingleProduct)
 
 const productRoute=router
 export default productRoute;

@@ -15,12 +15,17 @@ const getProductFromBB=async()=>{
     return result;
 }
 
-
+// retrieve single product by id
+const getSingleProductFromDB=async(id:string)=>{
+   const result=await ProductModel.findById(id);
+   return result
+}
 
 
 const productService={
     insertProductIntoDB,
     getProductFromBB,
+    getSingleProductFromDB,
 }
 
 export default productService;
