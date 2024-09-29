@@ -8,6 +8,9 @@ router.post("/",productController.insertProduct)
 router.get("/",productController.getAllProduct)
 // retrieve single product route
 router.get("/:id",productController.getSingleProduct)
+// update product
+router.put("/:id",productController.updateProduct)
+
 
 const productRoute=router
 export default productRoute;

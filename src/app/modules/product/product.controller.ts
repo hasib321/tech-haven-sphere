@@ -62,12 +62,35 @@ const getSingleProduct=async(req:Request,res:Response)=>{
   }
 }
 
+// update product
+const updateProduct=async(req:Request,res:Response)=>{
+    try{
+      const product=req.body;
+      const productId=req.params.id;
+      const validateProduct=ProductValidateSchema.parse(product);
+      const result = await productService.updateProductFromDb(productId,validateProduct);
+      res.status(200).json({
+        "success": true,
+        "message": "Product updated successfully!",
+        "data":result,
+      })
+
+    }catch(error){
+      res.status(500).json({
+        "success":false,
+        "message": "Product update failed",
+     })
+      console.log(error);
+    }
+
+}
 
 
 const productController={
     insertProduct,
     getAllProduct,
     getSingleProduct,
+    updateProduct,
 }
 
 export default productController;

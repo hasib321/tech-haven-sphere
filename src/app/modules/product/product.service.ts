@@ -21,11 +21,19 @@ const getSingleProductFromDB=async(id:string)=>{
    return result
 }
 
+// update product by id in db
+const updateProductFromDb=async(id:string,product:Product)=>{
+    const result=await ProductModel.findByIdAndUpdate(id,{$set:product},{new:true})
+    return result
+}
+
+
 
 const productService={
     insertProductIntoDB,
     getProductFromBB,
     getSingleProductFromDB,
+    updateProductFromDb,
 }
 
 export default productService;
