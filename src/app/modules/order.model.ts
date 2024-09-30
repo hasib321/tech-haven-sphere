@@ -6,7 +6,6 @@ const OrderSchema=new Schema<Order>({
         type:String,
         lowercase:true,
         trim:true,
-        unique:true,
     },
     productId:{
         type:String,
@@ -20,5 +19,5 @@ const OrderSchema=new Schema<Order>({
     }
 })
 
-const OrderModel= mongoose.model("order",OrderSchema);
+const OrderModel= mongoose.model<Order>("order",OrderSchema);
 export default OrderModel;

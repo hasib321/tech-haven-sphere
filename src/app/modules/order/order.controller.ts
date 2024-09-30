@@ -8,11 +8,18 @@ const createOrder=async(req:Request,res:Response)=>{
     const order=req.body;
     const validOrder=OrderValidationSchema.parse(order)
     const result=await orderService.createOrderIntoDB(validOrder);
-    res.status(200).json({
-        "success":true,
-        "message": "Order created successfully!",
-        "data":result
-    })
+    if(result){
+        res.status(200).json({
+            "success":true,
+            "message": "Order created successfully!",
+            "data":result
+        })
+    }else{
+        res.status(500).json({
+            "success":false,
+            "message": "Order insufficient stock.",
+        })
+    }
   }catch(error){
     res.status(500).json({
         "success":false,
@@ -24,9 +31,7 @@ const createOrder=async(req:Request,res:Response)=>{
 
 }
 
-
 // get order
-// create Order
 const findOrder=async(req:Request,res:Response)=>{
     try{
       const email=req.query?.email;
