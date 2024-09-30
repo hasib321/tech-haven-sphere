@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 import cors from "cors"
 import productRoute from "./app/modules/product/product.route";
+import { orderRoute } from "./app/modules/order/order.route";
 const app = express();
 
 
@@ -15,7 +16,11 @@ app.get("/",(req:Request,res:Response)=>{
    console.log("hello world")
 })
 
+// for product router
 app.use('/api/products',productRoute)
+
+// for order router
+app.use('/api/orders',orderRoute);
 
 // notFound handler
 const notFoundHandlers=(req:Request,res:Response,next:NextFunction)=>{
