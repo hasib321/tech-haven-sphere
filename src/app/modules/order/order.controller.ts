@@ -17,7 +17,7 @@ const createOrder=async(req:Request,res:Response)=>{
     }else{
         res.status(500).json({
             "success":false,
-            "message": "Order insufficient stock.",
+            "message": "Insufficient quantity available in inventory"
         })
     }
   }catch(error){
@@ -50,7 +50,7 @@ const findOrder=async(req:Request,res:Response)=>{
      }else{
         res.status(500).json({
             "success":false,
-            "message": "Order created successfully!",
+            "message": "Order not found"
         })
      }
     }catch(error){
